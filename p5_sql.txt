@@ -1,0 +1,23 @@
+DROP FUNCTION IF EXISTS divide_numbers;
+
+DELIMITER //
+
+CREATE FUNCTION divide_numbers(
+    num1 FLOAT,
+    num2 FLOAT
+) 
+RETURNS FLOAT
+DETERMINISTIC
+BEGIN
+    RETURN num1 / num2;
+END //
+
+DELIMITER ;
+
+SELECT 
+    order_id,
+    product_id,
+    quantity,
+    divide_numbers(quantity, 5.0) AS divided_quantity
+FROM 
+    order_details;
